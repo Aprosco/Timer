@@ -1,11 +1,7 @@
 import customtkinter as ctk
-import time
-
 
 print("Timer: ")
 
-exitRefreshTimer = False
-resetVar = False
 days = 0
 hours = 0
 minutes = 0
@@ -15,7 +11,6 @@ total = seconds,"Seconds", minutes,"minutes", hours,"Hours", days,"days"
 def pressedStartButton():
     global startTimer
     startTimer = True
-    label.configure(text=total)
     isStartTimerTrue()
 
 def pressedQuitButton():
@@ -24,25 +19,19 @@ def pressedStopButton():
     global startTimer
     startTimer = False
 def isStartTimerTrue():
-     if startTimer == True:
-        refreshTimer()
+    refreshTimer()
 
 def resetTimer():
-    global days, hours, minutes, seconds, total, exitRefreshTimer
+    global days, hours, minutes, seconds, total
     days = 0
     hours = 0
     minutes = 0
     seconds = 0
-    label.configure(text=total)
+    total = seconds,"Seconds", minutes,"minutes", hours,"Hours", days,"days"
     pressedStopButton()
     global startTimer
     startTimer = True
     label.configure(text=total)
-
-def resetLoopCheck():
-    global resetVar, total
-    if resetVar == True:
-        total = seconds,"Seconds", minutes,"minutes", hours,"Hours", days,"days"
 
 def refreshTimer():
         if startTimer == False:
@@ -64,7 +53,6 @@ def refreshTimer():
             if hours >= 24:
                 days += 1
                 hours = 0
-            resetLoopCheck()
 
 startTimer = False
 
@@ -72,7 +60,7 @@ app = ctk.CTk()
 app.geometry("800x800")
 app.title("Timer")
 
-total = seconds,"Seconds:", minutes,"minutes:", hours,"Hours:", days,"days:"
+total = seconds,"Seconds", minutes,"minutes", hours,"Hours", days,"days"
 
 customFont = ctk.CTkFont(family="Arial", size=30)
 label = ctk.CTkLabel(app, text=total, fg_color="transparent", width=200, height=200, font=customFont)
